@@ -1,0 +1,27 @@
+#!/bin/bash +vx
+
+if [ $# != 2 ]
+then
+	echo "usage: ./flush2sstables <sstable> <outputfile>"
+	exit
+fi
+
+# Get time as a UNIX timestamp (seconds elapsed since Jan 1, 1970 0:00 UTC)
+T="$(date +%s)"
+
+touch $2
+
+FILES=$1/*-Data.db
+
+for f in $FILES
+do
+  echo "Processing $f file..."
+  # take action on each file. $f store current file name
+  time /var/work/bsendir1/apache-cassandra-1.1.6-src/bin/sstable2json $f >>$2
+  #echo $f
+done
+
+T="$(($(date +%s)-T))"
+echo "Time in seconds: ${T}" #>> $2
+
+printf "Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))" "$((T/60%60))" "$((T%60))"
