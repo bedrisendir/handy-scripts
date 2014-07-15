@@ -1,0 +1,11 @@
+#!/bin/bash +vx
+#usage ./FileSplitter nodelist number_of_mapper
+prefix="LogData_User.";
+num_of_mapper=$2;
+for machines in `cat $1`
+do
+   filesize=$(wc -l < ${prefix}${machines})
+   #echo $filesize
+   #echo $machines
+   split -l $(($(($filesize+$num_of_mapper-1))/$num_of_mapper)) ${prefix}${machines} -d splits/${prefix}${machines}_
+done
