@@ -1,1 +1,2 @@
-du -h -s *
+du -h -s * //disk usage
+ls *.tar.gz | xargs -i tar -xzf {v} //tar multiple files
