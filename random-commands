@@ -1,2 +1,3 @@
 du -h -s * //disk usage
 ls *.tar.gz | xargs -i tar -xzf {v} //tar multiple files
+for a in `ls -1 *.tar.gz`; do b=`echo $a | cut -f1 -d'.'` ; mkdir $b;tar -zxvf $a -C $b; done
