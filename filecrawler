@@ -1,0 +1,8 @@
+
+#! /bin/bash
+for var in $(ls -d *)
+do
+        mkdir ~/cs542grading/allp1/$var
+        for f in $(find $var -name '*.java'); do cp $f ~/cs542grading/allp1/$var/; done
+done
+
