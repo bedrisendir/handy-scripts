@@ -1,10 +1,10 @@
 #! /bin/bash
-DUMP_FILES_PATH=~/output_files/
+DUMP_FILES_PATH=~/deleteme/
 RDD_TOOL_PATH=gInstall/rrdtool/bin/rrdtool
-OUTPUT_PATH=
-for file in `ls -1 *.rdd`
-do 
-  dest_file=`echo $var | cut -f1 -d'.'`
-  dest_file+=".xml"
-  echo $RDD_TOOL_PATH dump $file > $DUMP_FILES_PATH$dest_file
+OUTPUT_PATH=~/output_files/
+for file in `ls -1 $DUMP_FILES_PATH*.rdd`
+do
+base_file=`echo $(basename "$file") | cut -f1 -d'.'`
+base_file+=".xml"
+echo "$RDD_TOOL_PATH dump $file > $OUTPUT_PATH$base_file"
 done
